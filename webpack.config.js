@@ -3,11 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -30,13 +30,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
-          'sass-loader',
         ],
       },
     ],
@@ -51,10 +50,9 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 3000,
+    historyApiFallback: true,
+    port: 3005,
   },
 };
