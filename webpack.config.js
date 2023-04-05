@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -19,6 +20,10 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-transform-runtime'],
+          },
         },
       },
       {
@@ -28,8 +33,8 @@ module.exports = {
             loader: 'html-loader',
           },
         ],
-      },
-      {
+      }, {
+
         test: /\.css$/,
         use: [
           {
